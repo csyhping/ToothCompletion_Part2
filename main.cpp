@@ -1,7 +1,35 @@
+/*
+	Created by Yuhan Ping from HKU at 2019-07-30.
+	The project is part 2 of tooth completion to deal with neighbor teeth intersection.
+	Under development.
+	Lateset updated on 2019-07-31.
+*/
+
+#include <iostream>
+#include "Header/io.h"
+
 #include <igl/opengl/glfw/Viewer.h>
+
+using namespace std;
+using namespace Eigen;
+
+
 
 int main(int argc, char *argv[])
 {
+	if (argc != 3) {
+		cout << "[Usage] ToothCompletionPart2 [path1] [path2] " << endl;
+		exit(-1);
+	}
+
+	// setup path
+	inputmesh_1 = argv[1];
+	inputmesh_2 = argv[2];
+
+	// load data
+	load_from_file(inputmesh_1, inputmesh_2);
+	
+
   // Inline mesh of a cube
   const Eigen::MatrixXd V= (Eigen::MatrixXd(8,3)<<
     0.0,0.0,0.0,
