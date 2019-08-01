@@ -16,10 +16,20 @@
 
 extern std::string inputmesh_1, prefair_R_1, prefair_L_1, postfair_X_1;
 extern std::string inputmesh_2, prefair_R_2, prefair_L_2, postfair_X_2;
+extern Eigen::MatrixXd V1, V_prefair_R_1, V_prefair_L_1, V_postfair_X_1, V2, V_prefair_R_2, V_prefair_L_2, V_postfair_X_2;
+extern Eigen::MatrixXi F1, F2;
+
+// test for visualization
+extern Eigen::MatrixXd color;
 
 void load_from_file(std::string &path1, std::string &path2);
 /*
 	load relative data from corresponding files
+*/
+
+bool viewer_display(); 
+/*
+	viewer settings
 */
 
 

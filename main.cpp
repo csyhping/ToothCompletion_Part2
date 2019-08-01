@@ -7,8 +7,9 @@
 
 #include <iostream>
 #include "Header/io.h"
+#include "Header/adjust.h"
+#include <igl/winding_number.h>
 
-#include <igl/opengl/glfw/Viewer.h>
 
 using namespace std;
 using namespace Eigen;
@@ -28,35 +29,55 @@ int main(int argc, char *argv[])
 
 	// load data
 	load_from_file(inputmesh_1, inputmesh_2);
+
+	// detect intersection
+	if (!detect_intersection()) {
+		cout << "[INFO] No intersection detected !" << endl;
+		exit(-1);
+	}
+
+	// adjust intersection
+	adjust_intersection();
 	
-
-  // Inline mesh of a cube
-  const Eigen::MatrixXd V= (Eigen::MatrixXd(8,3)<<
-    0.0,0.0,0.0,
-    0.0,0.0,1.0,
-    0.0,1.0,0.0,
-    0.0,1.0,1.0,
-    1.0,0.0,0.0,
-    1.0,0.0,1.0,
-    1.0,1.0,0.0,
-    1.0,1.0,1.0).finished();
-  const Eigen::MatrixXi F = (Eigen::MatrixXi(12,3)<<
-    1,7,5,
-    1,3,7,
-    1,4,3,
-    1,2,4,
-    3,8,7,
-    3,4,8,
-    5,7,8,
-    5,8,6,
-    1,5,6,
-    1,6,2,
-    2,6,8,
-    2,8,4).finished().array()-1;
-
-  // Plot the mesh
-  igl::opengl::glfw::Viewer viewer;
-  viewer.data().set_mesh(V, F);
-  viewer.data().set_face_based(true);
-  viewer.launch();
+	// use viewer to visualize
+	viewer_display();
+	
+	// test winding number
+//	MatrixXd p = (MatrixXd(3, 3) <<
+//
+//		-1, 0.5, 0.5,
+//		0.9, 0.5, 0.5,
+//		2, 0.5, 0.5).finished();
+//	MatrixXd wn;
+//
+//	// Inline mesh of a cube
+//	const Eigen::MatrixXd V = (Eigen::MatrixXd(8, 3) <<
+//		0.0, 0.0, 0.0,
+//		0.0, 0.0, 1.0,
+//		0.0, 1.0, 0.0,
+//		0.0, 1.0, 1.0,
+//		1.0, 0.0, 0.0,
+//		1.0, 0.0, 1.0,
+//		1.0, 1.0, 0.0,
+//		1.0, 1.0, 1.0).finished();
+//	const Eigen::MatrixXi F = (Eigen::MatrixXi(6, 3) <<
+//		1, 4, 3,
+//		1, 2, 4,
+//		3, 8, 7,
+//		3, 4, 8,
+//		5, 7, 8,
+//		5, 8, 6
+//).finished().array() - 1;
+//
+//	igl::winding_number(V, F, p, wn);
+//	cout << "winding num = " << wn << endl;
+//
+//	// Plot the mesh
+//	igl::opengl::glfw::Viewer viewer;
+//	igl::opengl::glfw::imgui::ImGuiMenu menu;
+//	viewer.plugins.push_back(&menu);
+//	viewer.data().set_mesh(V, F);
+//	viewer.data().add_points(p, RowVector3d(1, 1, 0));
+//	viewer.data().set_face_based(true);
+//	viewer.launch();
 }

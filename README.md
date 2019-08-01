@@ -14,7 +14,7 @@
 √ Fairing  
 
 -----[PART 2]-----  
-? Detect intersection  
+√ Detect intersection  
 ? Adjust the intersection  
 ? Get the final result  
 ? Use script to process automatically with more data  
