@@ -9,7 +9,7 @@
 #include "Header/io.h"
 #include "Header/adjust.h"
 #include <igl/winding_number.h>
-
+#include <igl/shape_diameter_function.h>
 
 using namespace std;
 using namespace Eigen;

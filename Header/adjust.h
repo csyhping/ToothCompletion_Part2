@@ -8,6 +8,10 @@
 #ifndef ADJUST_H
 #define ADJUST_H
 #include <igl/winding_number.h>
+#include <igl/shape_diameter_function.h>
+#include <igl/writeOFF.h>
+#include <igl/jet.h>
+#include <igl/all_pairs_distances.h>
 
 bool detect_intersection();
 /*
